@@ -1,2 +1,2 @@
 [training]
-backend ansible_host=10.0.0.22 ansible_user=ec2-user
+backend ansible_host=10.0.0.25 ansible_user=ubuntu
