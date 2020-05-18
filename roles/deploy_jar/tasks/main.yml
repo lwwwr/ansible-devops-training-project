@@ -53,4 +53,5 @@
       systemd:
         name: backend
         state: reloaded
+      become: yes
 
