@@ -4,7 +4,7 @@
         group_id: 'backend-training-multi-branch-pipeline'
         artifact_id: 'backend-training'
         version: '{{ branch }}_{{ version }}'
-        repository_url: 'http://nexus.alavr.test.coherentprojects.net/service/rest/repository/browse/backend/'
+        repository_url: 'http://nexus.alavr.test.coherentprojects.net/repository/backend/'
         username: '{{ nexus_username }}'
         password: '{{ nexus_password }}'
         dest: /opt/backend.jar
