@@ -49,9 +49,14 @@
     #   with_items: "{{ running_processes.stdout_lines }}"
     #   become: yes
  
-    - name: reload service
+    - name: stop service
       systemd:
         name: backend
-        state: reloaded
+        state: stopped
       become: yes
-
+    
+    - name: run service
+      systemd:
+        name: backend
+        state: stopped
+      become: yes
