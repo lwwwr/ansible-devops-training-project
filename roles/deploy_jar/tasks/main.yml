@@ -37,19 +37,20 @@
         - "export JDBC_DRIVER={{ jdbc_driver }}"
       become: yes
 
-    - name: get running processes list from remote host
-      ignore_errors: yes
-      shell: "ps -few | grep /opt/backend.jar | awk '{print $2}'"
-      register: running_processes
-      become: yes
+    # - name: get running processes list from remote host
+    #   ignore_errors: yes
+    #   shell: "ps -few | grep /opt/backend.jar | awk '{print $2}'"
+    #   register: running_processes
+    #   become: yes
  
-    - name: kill running processes
-      ignore_errors: yes
-      shell: "kill -9 {{ item }}"
-      with_items: "{{ running_processes.stdout_lines }}"
-      become: yes
+    # - name: kill running processes
+    #   ignore_errors: yes
+    #   shell: "kill -9 {{ item }}"
+    #   with_items: "{{ running_processes.stdout_lines }}"
+    #   become: yes
  
-    - name: run jar
-      shell: 'java -Dserver.port=80 -jar /opt/backend.jar &'
-      become: yes
+    - name: reload service
+      systemd:
+        name: backend
+        state: reloaded
 
