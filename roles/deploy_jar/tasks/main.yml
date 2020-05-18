@@ -8,7 +8,7 @@
         username: '{{ nexus_username }}'
         password: '{{ nexus_password }}'
         dest: /opt/backend.jar
-        become: yes
+      become: yes
 
     - name: delete file environment
       ignore_errors: yes
