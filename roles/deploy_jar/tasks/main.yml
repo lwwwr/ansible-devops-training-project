@@ -39,4 +39,5 @@
 
     - name: Run jar
       shell: 'java -Dserver.port=80 -jar /opt/backend.jar'
+      become: yes
 
