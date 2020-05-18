@@ -1,0 +1,7 @@
+---
+- name: Deploy Backend jar file 
+  hosts: "{{ hosts }}"
+  gather_facts: True
+
+  roles:
+    - role: deploy_jar
