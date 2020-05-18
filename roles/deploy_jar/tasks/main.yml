@@ -1,14 +1,14 @@
 ---
-    # - name: Download backend artifact
-    #   maven_artifact:
-    #     group_id: 'backend-training-multi-branch-pipeline'
-    #     artifact_id: 'backend-training'
-    #     version: '{{ branch }}_{{ version }}'
-    #     repository_url: 'http://nexus.alavr.test.coherentprojects.net/service/rest/repository/browse/backend/'
-    #     username: '{{ nexus_username }}'
-    #     password: '{{ nexus_password }}'
-    #     dest: /opt/backend.jar
-    #     become: yes
+    - name: Download backend artifact
+      maven_artifact:
+        group_id: 'backend-training-multi-branch-pipeline'
+        artifact_id: 'backend-training'
+        version: '{{ branch }}_{{ version }}'
+        repository_url: 'http://nexus.alavr.test.coherentprojects.net/service/rest/repository/browse/backend/'
+        username: '{{ nexus_username }}'
+        password: '{{ nexus_password }}'
+        dest: /opt/backend.jar
+        become: yes
 
     - name: delete file environment
       ignore_errors: yes
@@ -37,6 +37,6 @@
         - "export JDBC_DRIVER={{ jdbc_driver }}"
       become: yes
 
-    # - name: Run jar
-    #   shell: 'java -Dserver.port=80 -jar /opt/backend.jar'
+    - name: Run jar
+      shell: 'java -Dserver.port=80 -jar /opt/backend.jar'
 
