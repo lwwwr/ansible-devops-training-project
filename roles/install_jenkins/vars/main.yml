@@ -1,0 +1,5 @@
+user_name: "ubuntu"
+group_name: "ubuntu"
+work_dir: jenkins_build_path
+jenkins_master_version: 2.204.2
+ref: /usr/share/jenkins/ref

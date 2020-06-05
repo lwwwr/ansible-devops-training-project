@@ -1,0 +1,7 @@
+---
+
+- name: "copy: Add ubuntu user to the sudoers"
+  copy:
+    dest: "/etc/sudoers.d/ubuntu"
+    content: "ubuntu  ALL=(ALL)  NOPASSWD: ALL"
+  become: yes

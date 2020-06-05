@@ -1,0 +1,4 @@
+# List of pip packages to be installed
+packages: ""
+# State of pip packages
+state: present

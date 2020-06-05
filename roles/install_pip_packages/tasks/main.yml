@@ -1,0 +1,4 @@
+- name: 'pip: install pip "{{ packages }}" packages'
+  pip:
+    name: "{{ packages }}"
+    state: "{{ state }}"

@@ -1,7 +1,0 @@
-db_url: "{{ lookup('env','DB_URL') }}"
-db_username: "{{ lookup('env','DB_USERNAME') }}"
-db_password: "{{ lookup('env','DB_PASSWORD') }}"
-db_port: "{{ lookup('env','DB_PORT') }}"
-db_name: "{{ lookup('env','DB_NAME') }}"
-jdbc_driver: "{{ lookup('env','JDBC_DRIVER') }}"
-# version: "{{ lookup('env','VERSION') }}"

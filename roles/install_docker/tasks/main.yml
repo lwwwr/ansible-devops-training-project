@@ -1,0 +1,41 @@
+---
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Update apt packages
+  apt:
+    update_cache: yes
+
+- name: "include_role: Install docker-ce"
+  include_role:
+    name: install_packages
+  vars:
+    state: present
+    packages:
+      - "docker-ce"
+
+- name: Add remote "ubuntu" user to "docker" group
+  user:
+    name: "ubuntu"
+    shell: "/bin/bash"
+    group: "docker"
+    append: yes
+
+- name: Install docker-compose
+  get_url: 
+    url : https://github.com/docker/compose/releases/download/1.25.5/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+
+- name: Change owner for docker-compose
+  file:
+    path: /usr/local/bin/docker-compose
+    owner: ubuntu
+    group: docker
+    mode: '0755'

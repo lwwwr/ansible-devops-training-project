@@ -1,0 +1,14 @@
+FROM jenkins/jenkins:{{ jenkins_master_version }}
+
+USER root
+
+RUN chown -R jenkins:jenkins {{ ref }}
+
+USER jenkins
+
+COPY --chown=jenkins:jenkins ./provision/csrf.groovy {{ ref }}/init.groovy.d/csrf.groovy
+COPY --chown=jenkins:jenkins ./provision/master.groovy {{ ref }}/init.groovy.d/master.groovy
+COPY --chown=jenkins:jenkins ./provision/url.groovy {{ ref }}/init.groovy.d/url.groovy
+COPY --chown=jenkins:jenkins ./provision/plugins.txt {{ ref }}/plugins.txt
+
+RUN /usr/local/bin/install-plugins.sh < {{ ref }}/plugins.txt
