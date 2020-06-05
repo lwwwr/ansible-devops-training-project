@@ -1,0 +1,11 @@
+version: "3"
+services:
+  nexus-prometheus:
+    image: ocadotechnology/nexus-exporter
+    ports:
+      - "9184:9184"
+    restart: unless-stopped
+    environment:
+      - NEXUS_HOST="{{ host }}""
+      - NEXUS_USERNAME="{{ username }}"
+      - NEXUS_ADMIN_PASSWORD="{{ password }}"

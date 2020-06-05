@@ -1,0 +1,24 @@
+---
+- name: "file: create {{ workdir }} directory if not exists"
+  file:
+    path: "{{ work_dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+
+- name: "template: transfer docker-compose template to remote"
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ work_dir }}/docker-compose-exporter.yml"
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+  notify: docker_compose_down
+
+- name: "docker-compose: run nexus-prometheus-exporter compose-file"   
+  docker_compose:
+    project_src: "{{ work_dir }}"
+    files:
+      - docker-compose-exporter.yml
+    build: yes

@@ -1,0 +1,40 @@
+---
+- name: "file: create {{ workdir }} directory if not exists"
+  file:
+    path: "{{ work_dir }}"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+
+- name: "copy: copy .dockerignore file"
+  copy:
+    src: "{{ role_path }}/files/.dockerignore"
+    dest: "{{ work_dir }}/.dockerignore"
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+
+- name: "template: transfer docker-compose template to remote"
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ work_dir }}/docker-compose.yml"
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+
+- name: "file: create 'nexus_home' directory if not exists"
+  file:
+    path: "{{ work_dir }}/nexus_home"
+    state: directory
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+  notify: docker_compose_down
+
+- name: "docker-compose: run nexus compose-file"   
+  docker_compose:
+    project_src: "{{ work_dir }}"
+    files:
+      - docker-compose.yml
+    build: yes
