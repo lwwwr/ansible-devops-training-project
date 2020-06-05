@@ -1,0 +1,20 @@
+---
+- hosts: "{{ target }}"
+  gather_facts: False
+  become: yes
+
+  tasks:
+    - include_role:
+        name: initial_user_setup
+    - include_role:
+        name: install_packages
+    - include_role:
+        name: install_docker
+    - include_role:
+        name: install_pip_packages
+      vars:
+        packages:
+          - docker
+          - docker-compose
+          - pyyaml
+

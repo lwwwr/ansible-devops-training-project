@@ -1,0 +1,5 @@
+- name: "docker_compose_down"
+  docker_compose:
+    project_src: "{{ work_dir }}"
+    state: absent
+  

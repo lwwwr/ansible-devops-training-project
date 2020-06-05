@@ -1,0 +1,9 @@
+version: "3"
+services:
+  sonarqube:
+    image: sonarqube:8.3.1-community
+    volumes:
+      - /home/{{ user_name }}/{{ work_dir }}/sonarqube_home/extensions/plugins:/opt/sonarqube/extensions/plugins
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
