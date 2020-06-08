@@ -23,32 +23,24 @@
     group: "{{ group_name }}"
     mode: 0755
 
-- name: "file: create 'prometheus_home' directory if not exists"
+- name: "file: create 'alertmanager_home' directory if not exists"
   file:
-    path: "{{ work_dir }}/prometheus_home"
+    path: "{{ work_dir }}/alertmanager_home"
     state: directory
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
   notify: docker_compose_down
 
-- name: "template: transfer prometheus.yml template to remote"
-  template:
-    src: prometheus.yml.j2
-    dest: "{{ work_dir }}/prometheus_home/prometheus.yml"
-    owner: "{{ user_name }}"
-    group: "{{ group_name }}"
-    mode: 0755
+# - name: "template: transfer prometheus.yml template to remote"
+#   template:
+#     src: prometheus.yml.j2
+#     dest: "{{ work_dir }}/alertmanager_home/prometheus.yml"
+#     owner: "{{ user_name }}"
+#     group: "{{ group_name }}"
+#     mode: 0755
 
-- name: "copy: copy alert.rules file"
-  copy:
-    src: "{{ role_path }}/files/alert.rules"
-    dest: "{{ work_dir }}/prometheus_home/alert.rules"
-    owner: "{{ user_name }}"
-    group: "{{ group_name }}"
-    mode: 0755
-
-- name: "docker-compose: run prometheus compose-file"   
+- name: "docker-compose: run alertmanager compose-file"   
   docker_compose:
     project_src: "{{ work_dir }}"
     files:

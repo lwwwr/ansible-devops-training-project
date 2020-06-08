@@ -1,0 +1,9 @@
+version: "3"
+services:
+  alertmanager:
+    image: prom/alertmanager
+    # volumes:
+      # - /home/{{ user_name }}/{{ work_dir }}/alertmanager_home:/etc/prometheus/
+    ports:
+      - "9093:9093"
+    restart: unless-stopped
