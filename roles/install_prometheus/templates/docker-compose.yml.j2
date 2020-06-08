@@ -1,0 +1,9 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - /home/{{ user_name }}/{{ work_dir }}/prometheus_home:/etc/prometheus/
+    ports:
+      - "9090:9090"
+    restart: unless-stopped

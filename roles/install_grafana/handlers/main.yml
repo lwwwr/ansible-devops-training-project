@@ -1,0 +1,7 @@
+- name: "docker_compose_down"
+  docker_compose:
+    project_src: "{{ work_dir }}"
+    files:
+      - docker-compose.yml
+    state: absent
+  

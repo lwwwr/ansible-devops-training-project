@@ -1,0 +1,8 @@
+ip:
+{% for h in groups['tag_Name_alavruschik_prometheus_grafana_alertmanager'] %}
+ - {{ hostvars[h].ansible_host }}
+{% endfor %}
+
+{% for h in groups['tag_Name_alavruschik_prometheus_grafana_alertmanager'] %}
+ - '{{ hostvars[h].ansible_host }}'
+{% endfor %}

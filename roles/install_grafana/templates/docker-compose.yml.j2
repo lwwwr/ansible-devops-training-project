@@ -1,0 +1,15 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana:7.0.3-ubuntu
+    #build: .
+    user: "472"
+    volumes:
+      - /home/{{ user_name }}/{{ work_dir }}/grafana_home/data:/var/lib/grafana
+      - /home/{{ user_name }}/{{ work_dir }}/grafana_home/config:/etc/grafana
+    # volumes:
+    #   - grafana-data:/var/lib/grafana
+    #   - grafana-config:/etc/grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
