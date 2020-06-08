@@ -30,15 +30,15 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  notify: docker_compose_down
 
-# - name: "template: transfer prometheus.yml template to remote"
-#   template:
-#     src: prometheus.yml.j2
-#     dest: "{{ work_dir }}/alertmanager_home/prometheus.yml"
-#     owner: "{{ user_name }}"
-#     group: "{{ group_name }}"
-#     mode: 0755
+- name: "copy: copy alertmanager.yml file"
+  copy:
+    src: "{{ role_path }}/files/alertmanager.yml"
+    dest: "{{ work_dir }}/alertmanager_home/alertmanager.yml"
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+  notify: docker_compose_down
 
 - name: "docker-compose: run alertmanager compose-file"   
   docker_compose:
