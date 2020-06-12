@@ -24,12 +24,12 @@ scrape_configs:
 #       - targets: ['{{ hostvars[h].ansible_host }}:9184']
 # {% endfor %}
 
-# {% for h in groups['tag_Name_alavruschik_jenkins'] %}
-#   - job_name: 'jenkins'
-#     metrics_path: '/prometheus'
-#     static_configs:
-#       - targets: ['{{ hostvars[h].ansible_host }}:8080']
-# {% endfor %}
+ {% for h in groups['tag_Name_alavruschik_jenkins'] %}
+  - job_name: 'jenkins'
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: ['{{ hostvars[h].ansible_host }}:8080']
+ {% endfor %}
 
 {% for h in groups['tag_coherent_owner_ArtemLavruschik_coherentsolutions_com'] %}
   - job_name: '{{ hostvars[h].ec2_tag_Name }}_node_exporter'

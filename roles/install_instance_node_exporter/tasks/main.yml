@@ -14,7 +14,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  notify: docker_compose_down
+  # notify: docker_compose_down
 
 - name: "template: ololo"
   template:
@@ -23,7 +23,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  notify: docker_compose_down
+  # notify: docker_compose_down
 
 - name: "docker-compose: run node_exporter compose-file"   
   docker_compose:
