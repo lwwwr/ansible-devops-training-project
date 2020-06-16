@@ -46,6 +46,24 @@ scrape_configs:
 {% endif %}
 {% endfor %}
 
+{% for h in groups['tag_coherent_owner_ArtemLavruschik_coherentsolutions_com'] %}
+{% if "nat" not in hostvars[h].ec2_tag_Name %}
+  - job_name: '{{ hostvars[h].ec2_tag_Name }}_blackbox' 
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets: ['{{ hostvars[h].ansible_host }}:9115']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: {{ hostvars[h].ansible_host }}:9115 # Blackbox exporter.
+
+{% endif %}
+{% endfor %}
 
 alerting:
   alertmanagers:

@@ -24,24 +24,24 @@
     mode: 0755
     force: yes
 
-- name: "file: create 'sonarqube_home' directory if not exists"
+- name: "file: create 'blackbox_home' directory if not exists"
   file:
-    path: "{{ work_dir }}/sonarqube_home"
+    path: "{{ work_dir }}/blackbox_home"
     state: directory
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
   # notify: docker_compose_down
 
-- name: "copy: copy prometheus exporter file"
+- name: "copy: copy blackbox file"
   copy:
-    src: "{{ role_path }}/files/sonar-prometheus-exporter-1.0.0-SNAPSHOT.jar"
-    dest: "{{ work_dir }}/sonarqube_home/extensions/plugins/"
+    src: "{{ role_path }}/files/blackbox.yml"
+    dest: "{{ work_dir }}/blackbox_home/blackbox.yml"
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-
-- name: "docker-compose: run sonarqube compose-file"   
+  
+- name: "docker-compose: run prometheus compose-file"   
   docker_compose:
     project_src: "{{ work_dir }}"
     files:

@@ -22,6 +22,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
+    force: yes
 
 - name: "file: create 'cadvisor_home' directory if not exists"
   file:

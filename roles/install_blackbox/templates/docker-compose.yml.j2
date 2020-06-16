@@ -1,0 +1,10 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/blackbox-exporter
+    volumes:
+      - /home/{{ user_name }}/{{ work_dir }}/blackbox_home:/config
+    ports:
+      - "9115:9115"
+    command: --config.file=/config/blackbox.yml
+    restart: unless-stopped

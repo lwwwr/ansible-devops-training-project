@@ -22,7 +22,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-    force: 
+    force: yes
 
 - name: "file: create 'prometheus_home' directory if not exists"
   file:
@@ -40,6 +40,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
+    force: yes
 
 - name: "copy: copy rules file"
   copy:
