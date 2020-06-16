@@ -1,0 +1,3 @@
+user_name: "ubuntu"
+group_name: "ubuntu"
+work_dir: cadvisor_build_path

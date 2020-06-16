@@ -14,11 +14,12 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  notify: docker_compose_down
+  # notify: docker_compose_down
 
 - name: "docker-compose: run nexus-prometheus-exporter compose-file"   
   docker_compose:
     project_src: "{{ work_dir }}"
     files:
       - docker-compose-exporter.yml
-    build: yes
+    state: present
+    restarted: yes

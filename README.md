@@ -45,4 +45,22 @@ AWS_PROFILE=*профиль* ansible-playbook -i ec2.py setup_env.yml --extra-va
 
 # Не забываем редактировать темплейты на каждую тачку
 
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py initial_user_setup.yml --extra-vars "target=all"
 
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py setup_env.yml --extra-vars "target=all"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_docker.yml --extra-vars "target=all"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_instance_node_exporter.yml --extra-vars "target=all"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_jenkins.yml --extra-vars "target=tag_Name_alavruschik_jenkins"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_sonarcube.yml --extra-vars "target=tag_Name_alavruschik_sonar_qube_nexus"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_nexus.yml --extra-vars "target=tag_Name_alavruschik_sonar_qube_nexus"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_prometheus.yml --extra-vars "target=tag_Name_alavruschik_prometheus_grafana_alertmanager"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_alertmanager.yml --extra-vars "target=tag_Name_alavruschik_prometheus_grafana_alertmanager"
+
+##### AWS_PROFILE=ansible ansible-playbook -i ec2.py install_grafana.yml --extra-vars "target=tag_Name_alavruschik_prometheus_grafana_alertmanager"

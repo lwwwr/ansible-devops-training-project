@@ -7,6 +7,14 @@
     group: "{{ group_name }}"
     mode: 0755
 
+- name: "copy: copy .dockerignore file"
+  copy:
+    src: "{{ role_path }}/files/.dockerignore"
+    dest: "{{ work_dir }}/.dockerignore"
+    owner: "{{ user_name }}"
+    group: "{{ group_name }}"
+    mode: 0755
+
 - name: "template: transfer docker-compose template to remote"
   template:
     src: docker-compose.yml.j2
@@ -14,22 +22,19 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  # notify: docker_compose_down
 
-- name: "template: ololo"
-  template:
-    src: ololo.j2
-    dest: "{{ work_dir }}/ololo.txt"
+- name: "file: create 'cadvisor_home' directory if not exists"
+  file:
+    path: "{{ work_dir }}/cadvisor_home"
+    state: directory
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  # notify: docker_compose_down
 
-- name: "docker-compose: run node_exporter compose-file"   
+- name: "docker-compose: run alertmanager compose-file"   
   docker_compose:
     project_src: "{{ work_dir }}"
     files:
       - docker-compose.yml
-    build: yes
     state: present
     restarted: yes

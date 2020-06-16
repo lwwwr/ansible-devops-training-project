@@ -55,6 +55,8 @@
     files:
       - docker-compose.yml
     build: yes
+    state: present
+    restarted: yes
 
 - name: "Recursively change ownership of a directory to grafana"
   file:

@@ -45,4 +45,5 @@
     project_src: "{{ work_dir }}"
     files:
       - docker-compose.yml
-    build: yes
+    state: present
+    restarted: yes

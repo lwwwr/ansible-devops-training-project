@@ -22,6 +22,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
+    force: 
 
 - name: "file: create 'prometheus_home' directory if not exists"
   file:
@@ -30,7 +31,7 @@
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
-  notify: docker_compose_down
+  # notify: docker_compose_down
 
 - name: "template: transfer prometheus.yml template to remote"
   template:
@@ -40,17 +41,20 @@
     group: "{{ group_name }}"
     mode: 0755
 
-- name: "copy: copy alert.rules file"
+- name: "copy: copy rules file"
   copy:
-    src: "{{ role_path }}/files/alert.rules"
-    dest: "{{ work_dir }}/prometheus_home/alert.rules"
+    src: "{{ item }}"
+    dest: "{{ work_dir }}/prometheus_home"
     owner: "{{ user_name }}"
     group: "{{ group_name }}"
     mode: 0755
+  with_fileglob:
+    - "{{ role_path }}/files/*.rules"  
 
 - name: "docker-compose: run prometheus compose-file"   
   docker_compose:
     project_src: "{{ work_dir }}"
     files:
       - docker-compose.yml
-    build: yes
+    state: present
+    restarted: yes
