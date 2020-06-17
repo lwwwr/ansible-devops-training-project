@@ -1,0 +1,12 @@
+version: "3"
+services:
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.7.1
+    user: root
+    volumes:
+      - /home/{{ user_name }}/{{ work_dir }}/logstash_home/frontend.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - /home/{{ user_name }}/{{ work_dir }}/logstash_home/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - /home/{{ user_name }}/{{ work_dir }}/logstash_home/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
+    ports:
+      - "5044:9600"
+    restart: unless-stopped

@@ -1,0 +1,42 @@
+#=========================== Filebeat inputs =============================
+
+filebeat.inputs:
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input specific configurations.
+
+- type: log
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - /var/lib/docker/containers/*/*.log
+
+
+
+#============================= Filebeat modules ===============================
+
+filebeat.config.modules:
+  # Glob pattern for configuration loading
+  path: ${path.config}/modules.d/*.yml
+
+  # Set to true to enable config reloading
+  reload.enabled: true
+
+  # Period on which files under path should be checked for changes
+  reload.period: 10s
+
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  # The Logstash hosts
+{% for h in groups['tag_Name_alavruschik_logstash_kibana'] %} 
+  hosts: ["{{ hostvars[h].ansible_host }}:5044"]
+{% endfor %}
+
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~

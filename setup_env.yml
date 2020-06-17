@@ -17,4 +17,10 @@
           - docker
           - docker-compose
           - pyyaml
+    - include_role:
+        name: install_instance_node_exporter
+    - include_role:
+        name: install_blackbox
+    - include_role:
+        name: install_cadvisor
 

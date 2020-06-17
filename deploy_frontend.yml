@@ -1,0 +1,21 @@
+---
+- hosts: "{{ target }}"
+  gather_facts: False
+  become: yes
+  
+  tasks:
+
+    - name: Git clone
+      git:
+        repo: 'https://github.com/lwwwr/frontend-devops-training-project/'
+        dest: '/home/ubuntu/frontend'
+        version: 'master'
+
+    - name: "docker-compose: run frontend compose-file"   
+      docker_compose:
+        project_src: "/home/ubuntu/frontend"
+        files:
+          - docker-compose.yml
+        build: yes
+        state: present
+        restarted: yes

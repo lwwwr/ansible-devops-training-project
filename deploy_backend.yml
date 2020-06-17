@@ -1,0 +1,21 @@
+---
+- hosts: "{{ target }}"
+  gather_facts: False
+  become: yes
+  
+  tasks:
+
+    - name: Git clone
+      git:
+        repo: 'https://github.com/lwwwr/backend-devops-training-project/'
+        dest: '/home/ubuntu/backend'
+        version: 'prd'
+
+    - name: "docker-compose: run backend compose-file"   
+      docker_compose:
+        project_src: "/home/ubuntu/backend"
+        files:
+          - docker-compose.yml
+        build: yes
+        state: present
+        restarted: yes

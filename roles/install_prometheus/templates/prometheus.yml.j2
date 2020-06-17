@@ -51,7 +51,9 @@ scrape_configs:
   - job_name: '{{ hostvars[h].ec2_tag_Name }}_blackbox' 
     metrics_path: /probe
     params:
-      module: [http_2xx]
+      module: 
+        - http_2xx
+        # - icmp
     static_configs:
       - targets: ['{{ hostvars[h].ansible_host }}:9115']
     relabel_configs:

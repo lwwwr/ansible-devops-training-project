@@ -1,0 +1,16 @@
+input {
+    beats {
+    	port => 5044
+    	ssl => false
+    }
+}
+
+output {
+  stdout { codec => rubydebug }
+  elasticsearch { 
+{% for h in groups['tag_Name_alavruschik_elastic'] %}
+	hosts => ["{{ hostvars[h].ansible_host }}:9201"] 
+{% endfor %}
+  	index => "frontend-%{+YYYY.MM.dd}"
+  }
+}

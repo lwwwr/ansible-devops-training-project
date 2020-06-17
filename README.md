@@ -10,14 +10,11 @@ ___
 
 Дальше лучше.
 
-## Ну-с, сначала надо поставить везде пакет пэкеджей
+## Ну-с, сначала надо поставить везде пакет пэкеджей и метрик
 
 AWS_PROFILE=*профиль* ansible-playbook -i ec2.py setup_env.yml --extra-vars "target=*таргет_группа_со_всеми_тачками*"
 
-## Добавляем убунту-юзика в судоеры на всякий случай
-
-###AWS_PROFILE=*профиль* ansible-playbook -i ec2.py initial_user_setup.yml --extra-vars "target=ТАРГЕТ_ГРУППА"  
-Не забудем, что у нас плейбуки заточены тупо под амазоновские амишки с убунтой, где юзик *ubuntu*
+### AWS_PROFILE=ansible ansible-playbook -i ec2.py setup_env.yml --extra-vars "target=all"
 
 ## Дальше раскатываем плейбуки на нужные инстансы
 
@@ -44,8 +41,6 @@ AWS_PROFILE=*профиль* ansible-playbook -i ec2.py setup_env.yml --extra-va
 #### install_sonarquce.yml
 
 # Не забываем редактировать темплейты на каждую тачку
-
-##### AWS_PROFILE=ansible ansible-playbook -i ec2.py initial_user_setup.yml --extra-vars "target=all"
 
 ##### AWS_PROFILE=ansible ansible-playbook -i ec2.py setup_env.yml --extra-vars "target=all"
 

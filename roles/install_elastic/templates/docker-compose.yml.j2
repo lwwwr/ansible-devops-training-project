@@ -1,0 +1,16 @@
+version: "3"
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.1
+    environment:
+      - discovery.type=single-node
+    # volumes:
+    #   - /home/{{ user_name }}/{{ work_dir }}/filebeat_home/filebeat.yml:/usr/share/filebeat/filebeat.yml
+    #   - /var/run/docker.sock:/var/run/docker.sock
+    #   - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+    #   - /var/log/:/var/log/:ro
+    #   - /var/log/audit/:/var/log/audit/:ro
+    ports:
+      - "9201:9200"
+      - "9300:9300"
+    restart: unless-stopped

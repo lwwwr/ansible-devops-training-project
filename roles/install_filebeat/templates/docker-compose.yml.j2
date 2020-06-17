@@ -1,0 +1,14 @@
+version: "3"
+services:
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.7.1
+    user: root
+    volumes:
+      - /home/{{ user_name }}/{{ work_dir }}/filebeat_home/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+      - /var/log/:/var/log/:ro
+      - /var/log/audit/:/var/log/audit/:ro
+    ports:
+      - "5044:5044"
+    restart: unless-stopped

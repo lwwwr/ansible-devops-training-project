@@ -1,0 +1,8 @@
+---
+- hosts: "{{ target }}"
+  gather_facts: False
+  become: yes
+  
+  tasks:
+    - include_role:
+        name: install_filebeat
